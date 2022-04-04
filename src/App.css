@@ -4,11 +4,10 @@
   border:1px solid;
   border-radius:50px;
   margin:20px auto;
-  padding:20px;
+  padding:10px;
   background-color:#101820FF;
   color: #fff;
-  max-width: 380px;
-  --width:100%;
+  --max-width: 380px;
 }
 
 
@@ -25,4 +24,9 @@ button{
   background-color: #0063B2FF;
   color:#fff;
   letter-spacing: 1px;
+}
+
+button:active{
+  background-color: darkgray;
+  color: black;
 }

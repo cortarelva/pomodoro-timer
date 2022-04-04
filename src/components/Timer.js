@@ -4,12 +4,11 @@ import ding_dong from '../sounds/ding_dong.wav';
 import { TimerContext } from "./Timer_context";
 
 import Timer_display from "./Timer_display";
-
+import Progress_bar from "./ProgressBar";
 
 
 const Timer = () => {
-
-    
+    const [seconds, setSeconds] = useState(100);
 
     const [time, setTime] = useState('');
     const [intervalId, setIntervalId] = useState('');
@@ -23,6 +22,7 @@ const Timer = () => {
     const setTimer = (event) => {
         setTime(prevTime => event.target.value)
         setTimeAmount(event.target.value)
+        setSeconds(prevSeconds => event.target.value)
     }
 
    
@@ -32,24 +32,29 @@ const Timer = () => {
     }
    
 
-    const startTimer = () => {
+    const startTimer = (e) => {
         if (time == '') {
             alert('Please set a time');
         } else {
             const newIntervalId = setInterval(() => {
                 setTime(prevCount => prevCount - 1)
-            }, 60000)
+            }, 600)
             setIntervalId(newIntervalId)
             disabledTrue()
         }
+        document.getElementById('btnStart').style.color = "darkred";
+        
     }
+
+
 
     useEffect(() => {
         if (time == 0) {
             clearInterval(intervalId)
             disabledFalse()
             Alert()
-            document.getElementById('btnReset').style.color = 'red'
+            document.getElementById('btnReset').style.color = 'limegreen';
+            document.getElementById("btnStart").style.color = "#fff";
         } else { document.getElementById('btnReset').style.color = '#fff' }
     }, [time])
     
@@ -57,6 +62,7 @@ const Timer = () => {
         clearInterval(intervalId)
         setIntervalId(0)
         disabledFalse()
+        document.getElementById("btnStart").style.color = "#fff";
         return;
     }
 
@@ -87,6 +93,7 @@ const Timer = () => {
             </form>
             <TimerContext.Provider value={time}>
                 <Timer_display />
+                <Progress_bar />
                 <div className="#">
                     <button id="btnStart" onClick={startTimer}>Start</button>
                     <button onClick={stopTimer}>Stop</button>

@@ -1,4 +1,5 @@
 import Timer from './components/Timer';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 import './App.css';
 
